@@ -25,8 +25,7 @@ const Index: React.FC<IndexProps> = () => {
     const [imageFront, setImageFront] = useState('');
     const [imageBack, setImageBack] = useState('');
     const [tipo, setTipo] = useState('');
-    const [pokemonPesquisado, setPokemonPesquisado] = useState('');
-    const [contratar, setContratar] = useState(false);
+    const [encaminharMensagem, setEncaminharMensagem] = useState(false);
 
     async function buscarPokemon(nome: string) {
         try {
@@ -37,11 +36,11 @@ const Index: React.FC<IndexProps> = () => {
             setImageFront(pokemon.sprites.front_default)
             setImageBack(pokemon.sprites.back_default)
             let tipos = '';
-            pokemon.types.map((a, i) => {
-                if (i != 0) {
+            pokemon.types.map((tipo, index) => {
+                if (index != 0) {
                     tipos += ' | ';
                 }
-                tipos += a.type.name;
+                tipos += tipo.type.name;
             });
             setTipo(tipos)
         } catch (error) {
@@ -50,28 +49,42 @@ const Index: React.FC<IndexProps> = () => {
         }
     }
 
+
     return (
         <ScrollView style={{ flex: 1 }}>
             <PageTitleContainer>
                 <PageTitleStyled>Digite o nome do pokemon</PageTitleStyled>
                 <PageSubTitleStyled>Ou o seu definitivo numero</PageSubTitleStyled>
             </PageTitleContainer>
+
             <TextInput
                 style={{ borderWidth: 1, padding: 10, height: 40, margin: 12 }}
-                onChangeText={setPokemonPesquisado}
+                onChangeText={(pesquisa) => buscarPokemon(pesquisa)}    
             />
-            <Button mode={'contained'} onPress={() => buscarPokemon(pokemonPesquisado)}>Verificar Pokemon</Button>
-            {id > 0 &&
-                <View style={{ flex: 1, direction: 'row', alignItems: "center", padding: 10 }}>
-                    {imageFront && <Image style={{ width: 100, height: 100 }} source={{ uri: `${imageFront}` }} />}
-                    <PageTitleContainer>
-                        <PageTitleStyled>{name}</PageTitleStyled>
-                        <PageSubTitleStyled>{name}</PageSubTitleStyled>
-                    </PageTitleContainer>
-                    {imageBack && <Image style={{ width: 100, height: 100 }} source={{ uri: `${imageBack}` }} />}
-                    <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => setContratar(true)}> Agendar encontro</Button>
-                    {contratar && <Text> Pontos de Encontro: Ainda vai ser implementado </Text>}
+
+            {id > 0 ?
+                <View style={{ flex: 1, alignItems: "center", padding: 10 }}>
+                        {imageFront ? <Image style={{ width: 400, height: 400 }} source={{ uri: `${imageFront}` }} /> : null}
+                    <View style={{ flex: 1, flexDirection: "row", }}>
+                        <View style={{ marginTop: 5 }}>
+                            <PageTitleStyled>{name}</PageTitleStyled>
+                            <PageSubTitleStyled>{tipo}</PageSubTitleStyled>
+                        </View>
+                        {/* {imageBack ? <Image style={{ width: 100, height: 100 }} source={{ uri: `${imageBack}` }} /> : null} */}
+                    </View>
+                    <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => setEncaminharMensagem(true)}>Encaminhar Mensagem</Button>
                 </View>
+                :
+                <View style={{ flex: 1, alignItems: "center", padding: 10 }}>
+                    <PageSubTitleStyled>Favor inserir valores corretos para a busca</PageSubTitleStyled>
+                </View>
+            }
+            {encaminharMensagem ?
+                <View style={{ flex: 1, alignItems: "center", padding: 10 }}>
+                    <PageSubTitleStyled>Vai abri o Whatsapp da pessoa pra fazer solicitação</PageSubTitleStyled>
+                </View>
+                :
+                <View />
             }
         </ScrollView>
     )

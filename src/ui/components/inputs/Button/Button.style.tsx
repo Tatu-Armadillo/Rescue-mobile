@@ -1,5 +1,4 @@
 import styled from '@emotion/native';
-import { TapGestureHandler } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 
 export const ButtonStyled = styled(Button)`
