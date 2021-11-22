@@ -4,9 +4,8 @@ export interface UsePokemon {
     height: number,
     weight: number,
     base_experience: number,
-    sprites: ImagePokemon
-    types: Tipo[];
-
+    sprites: ImagePokemon,
+    types: Tipo[]
 }
 
 interface ImagePokemon {
@@ -14,12 +13,12 @@ interface ImagePokemon {
     front_default: string
 }
 
-interface Tipo{
+interface Tipo {
     slot: number,
     type: {
         name: string,
-        url: string 
-    } 
+        url: string
+    }
 
 }
 
