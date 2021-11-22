@@ -5,12 +5,14 @@ import { NavigationTheme } from 'ui/themes/app-theme'
 import Index from "pages";
 import { PageTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
 import Contratar from "pages/Contratar"
+import Contato from "pages/Contao";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export type RootStackParamList = {
     Index: undefined;
-    Contratar: {id: number, name: string};
+    Contratar: undefined;
+    Contato: undefined;
 }
 
 const Router: React.FC = () => {
@@ -26,6 +28,7 @@ const Router: React.FC = () => {
                         }}
                 />
                 <Stack.Screen name={'Contratar'} component={Contratar} options={{ title: 'Contratar' }} />
+                <Stack.Screen name={'Contato'} component={Contato} options={{ title: 'Contato' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

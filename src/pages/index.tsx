@@ -97,7 +97,7 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                             <PageSubTitleStyled>Largura: 15cm</PageSubTitleStyled>
                         </View>
                     </View>
-                    <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Contratar', { id: id, name })} >Contratar</Button>
+                    <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Contratar')} >Contratar</Button>
                 </View>
                 :
                 <View style={{ flex: 1, alignItems: "center", padding: 10 }}>
