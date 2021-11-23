@@ -1,4 +1,4 @@
-import { sharer } from "data/services/utils";
+import { Donos, sharer } from "data/services/utils";
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
@@ -11,13 +11,13 @@ const Contato: React.FC = () => {
         <ScrollView>
             <View style={{ flexDirection: "row", justifyContent: "space-evenly", padding: 10 }}>
                 <View>
-                    <Avatar.Image source={{ uri: "https://avatars.githubusercontent.com/u/69278300?v=4" }} />
+                    <Avatar.Image source={{ uri: Donos.dono1.imagem }} />
                 </View>
                 <View>
-                    <Text>Nome do Dono: José</Text>
+                    <Text>Nome do Dono: {Donos.dono1.nome}</Text>
                     <Text>Nome do Pokemon: {sharer.pokemon?.name}</Text>
-                    <Text>Contato: (00) 4002 8922</Text>
-                    <Text>Qualidade do animal</Text>
+                    <Text>Telefone: {Donos.dono1.telefone}</Text>
+                    <Text>Email: {Donos.dono1.email}</Text>
                 </View>
             </View>
 
