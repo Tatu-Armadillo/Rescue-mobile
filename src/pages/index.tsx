@@ -11,6 +11,7 @@ import {
     PageTitleStyled
 } from '../ui/components/data-display/PageTitle/PageTitle.style'
 import { sharer } from "data/services/utils";
+import { AirbnbRating } from "react-native-ratings";
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Index'>;
 interface IndexProps {
@@ -53,7 +54,7 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                 height: data.height,
                 weight: data.weight,
                 base_experience: data.base_experience,
-                sprites: 
+                sprites:
                 {
                     back_default: data.sprites.back_default,
                     front_default: data.sprites.front_default
@@ -84,6 +85,8 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                         <View style={{ marginTop: 5 }}>
                             <PageTitleStyled>{name}</PageTitleStyled>
                             <PageSubTitleStyled>{tipo}</PageSubTitleStyled>
+                            <PageSubTitleStyled>Avalição</PageSubTitleStyled>
+                            <AirbnbRating defaultRating={5} isDisabled size={10} showRating={false} />
                         </View>
                         {/* {imageBack ? <Image style={{ width: 100, height: 100 }} source={{ uri: `${imageBack}` }} /> : null} */}
                     </View>
@@ -95,6 +98,7 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                         <View style={{ margin: 5 }}>
                             <PageSubTitleStyled>Altura: {height}cm</PageSubTitleStyled>
                             <PageSubTitleStyled>Largura: 15cm</PageSubTitleStyled>
+
                         </View>
                     </View>
                     <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Contratar')} >Contratar</Button>
