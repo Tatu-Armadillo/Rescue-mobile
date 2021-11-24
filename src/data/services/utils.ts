@@ -28,6 +28,6 @@ export const Donos = {
         sobrenome: "Carolina de Alencar",
         telefone: "(65) 8871-4240",
         email: "Ana.Carolina@gmail.com",
-        imagem: ""
+        imagem: "https://avatars.githubusercontent.com/u/82791430?v=4"
     }
 }

@@ -1,12 +1,23 @@
 import { Donos, sharer } from "data/services/utils";
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, Linking } from "react-native";
 import { Avatar } from "react-native-paper";
 import Button from "ui/components/inputs/Button/Button";
 import { PageSubTitleStyled, PageTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
-import { ButtonStyled } from "ui/components/inputs/Button/Button.style";
 
 const Contato: React.FC = () => {
+
+    async function whatsApp(phone: string, texto: string) {
+        try {
+            Linking.openURL(`https://api.whatsapp.com/send?phone=${phone}&text=${texto}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const horarioManha: string = `08:00 as 10:00`;
+    const horarioTarde: string = `16:00 as 18:00`;
+    let mensagem: string = `Boa noite, estou encaminhando mensagem para solicitar o ${sharer.pokemon?.name} no periodo das `;
+
     return (
         <ScrollView>
             <View style={{ flexDirection: "row", justifyContent: "space-evenly", padding: 10 }}>
@@ -26,10 +37,11 @@ const Contato: React.FC = () => {
                     <PageTitleStyled>Horarios Disponiveis</PageTitleStyled>
                 </View>
                 <View style={{ alignItems: "center", padding: 10 }}>
-                    <Text style={{ fontSize: 25 }}>08:00 as 10:00</Text>
-                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => console.log('Botão Pressionado')} >Agendar</Button>
-                    <Text style={{ fontSize: 25 }}>16:00 as 18:00</Text>
-                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => console.log('Botão Pressionado')} >Agendar</Button>
+                    <Text style={{ fontSize: 25 }}>{horarioManha}</Text>
+                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp("992580116", mensagem + horarioManha)}>Agendar</Button>
+
+                    <Text style={{ fontSize: 25 }}>{horarioTarde}</Text>
+                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp("992580116", mensagem + horarioTarde)}>Agendar</Button>
                 </View>
             </View>
         </ScrollView>
