@@ -105,7 +105,7 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                 </View>
                 :
                 <View style={{ flex: 1, alignItems: "center", padding: 10 }}>
-                    <PageSubTitleStyled>Favor inserir valores corretos para a busca</PageSubTitleStyled>
+                    <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Lista')}>Verificar Catalogo</Button>
                 </View>
             }
         </ScrollView>

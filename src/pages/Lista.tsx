@@ -4,10 +4,9 @@ import { ApiPokemons } from "data/services/ApiPokemon";
 import { sharer } from "data/services/utils";
 import React, { useState } from "react"
 import { ScrollView, Text, View } from "react-native";
-import { Avatar } from "react-native-paper";
+import { Avatar, Button } from "react-native-paper";
 import { PageTitleStyled, PageSubTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
 import { RootStackParamList } from "ui/router/Router";
-import Button from 'ui/components/inputs/Button/Button';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Index'>;
 
@@ -15,7 +14,7 @@ interface IndexProps {
     navigation: NavigationProp;
 };
 
-const Lista: React.FC = ({ }) => {
+const Lista: React.FC<IndexProps> = ({ navigation }) => {
 
     const [apresentarLista, setApresentarLista] = useState(false);
     const [pokedex, setPokedex] = useState([sharer.pokemon]);
@@ -23,9 +22,8 @@ const Lista: React.FC = ({ }) => {
     async function buscarPokemon() {
         try {
             let pokeData = [];
-            for (let index = 1; index <= 151; index++) {
+            for (let index = 1; index <= 9; index++) {
                 const { data } = await ApiPokemons.get('pokemon/' + index);
-                const pokemon: UsePokemon = data;
                 sharer.pokemon = {
                     id: data.id,
                     name: data.name,
@@ -41,7 +39,6 @@ const Lista: React.FC = ({ }) => {
                 }
                 pokeData.push(sharer.pokemon)
                 console.log();
-
             }
             setPokedex(pokeData)
         } catch (error) {
@@ -52,19 +49,32 @@ const Lista: React.FC = ({ }) => {
     return (
         <ScrollView>
             <PageTitleStyled> Animais Registrados </PageTitleStyled>
-            <Button style={{ marginTop: 20 }} mode="outlined"
+            <Button style={{ margin: 20 }} mode="outlined"
                 onPress={() => {
                     buscarPokemon()
                     setApresentarLista(true);
                 }
-                }>Listar Pokemons </Button>
+                }>Listar Pokemons
+            </Button>
 
             {apresentarLista && pokedex.length > 0 ?
                 pokedex.map((pokemon, index) =>
-                    <View key={index} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", margin: 20 }}>
-                        <Avatar.Image source={{ uri: pokemon?.sprites.front_default }} />
-                        <Text style={{ marginStart: 10, marginEnd: 10 }}>{pokemon?.name}</Text>
-                        <Avatar.Image source={{ uri: pokemon?.sprites.back_default }} />
+
+                    <View key={index} style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                        <Button style={{ flexDirection: "row" }}
+                            onPress={() => {
+                                navigation.navigate('Contratar');
+                            }}>
+
+                            <View style={{ flexDirection: "row" }}>
+                                <Avatar.Image source={{ uri: pokemon?.sprites.front_default }} />
+                                <View style={{ flexDirection: "column" }}>
+                                    <Text style={{ fontSize: 20, color: "#FFF" }}>{pokemon?.name}</Text>
+                                    <Text style={{ fontSize: 20, color: "#FFF" }}>{pokemon?.id}</Text>
+                                </View>
+                                <Avatar.Image source={{ uri: pokemon?.sprites.back_default }} />
+                            </View>
+                        </Button>
                     </View>
                 )
                 :

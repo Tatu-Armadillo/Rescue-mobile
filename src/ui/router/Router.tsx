@@ -21,7 +21,6 @@ const Router: React.FC = () => {
     return (
         <NavigationContainer theme={NavigationTheme}>
             <Stack.Navigator>
-                <Stack.Screen name={'Lista'} component={Lista} options={{ title: 'Lista' }} />
                 <Stack.Screen name={'Index'}
                     component={Index}
                     options={
@@ -32,6 +31,7 @@ const Router: React.FC = () => {
                 />
                 <Stack.Screen name={'Contratar'} component={Contratar} options={{ title: 'Contratar' }} />
                 <Stack.Screen name={'Contato'} component={Contato} options={{ title: 'Contato' }} />
+                <Stack.Screen name={'Lista'} component={Lista} options={{ title: 'Lista' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
