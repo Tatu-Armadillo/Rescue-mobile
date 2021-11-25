@@ -16,7 +16,7 @@ const Contato: React.FC = () => {
     }
     const horarioManha: string = `08:00 as 10:00`;
     const horarioTarde: string = `16:00 as 18:00`;
-    let mensagem: string = `Boa noite, estou encaminhando mensagem para solicitar o ${sharer.pokemon?.name} no periodo das `;
+    let mensagem: string = `Mensagem encaminhada pelo aplicativo Rescue-Animal. Boa noite, estou encaminhando mensagem para solicitar o ${sharer.pokemon?.name} no periodo das `;
 
     return (
         <ScrollView>
@@ -38,10 +38,10 @@ const Contato: React.FC = () => {
                 </View>
                 <View style={{ alignItems: "center", padding: 10 }}>
                     <Text style={{ fontSize: 25 }}>{horarioManha}</Text>
-                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp("992580116", mensagem + horarioManha)}>Agendar</Button>
+                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp(Donos.dono1.telefone, mensagem + horarioManha)}>Agendar</Button>
 
                     <Text style={{ fontSize: 25 }}>{horarioTarde}</Text>
-                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp("992580116", mensagem + horarioTarde)}>Agendar</Button>
+                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp(Donos.dono2.telefone, mensagem + horarioTarde)}>Agendar</Button>
                 </View>
             </View>
         </ScrollView>

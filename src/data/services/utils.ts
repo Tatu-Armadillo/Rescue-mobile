@@ -12,14 +12,14 @@ export const Donos = {
     dono1: {
         nome: "Felipe",
         sobrenome: "Alves de Olviera",
-        telefone: "(65) 4002-8922",
+        telefone: "5565992989119",
         email: "felipe.oliveira@gmail.com",
         imagem: "https://avatars.githubusercontent.com/u/69278300?v=4"
     },
     dono2: {
         nome: "Kayan",
         sobrenome: "Rosa Brandão",
-        telefone: "(65) 99728-2244",
+        telefone: "5565993561544",
         email: "Kayan.Rosa@gmail.com",
         imagem: ""
     },

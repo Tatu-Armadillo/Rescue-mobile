@@ -1,6 +1,6 @@
+import React, { useState } from "react"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { sharer } from "data/services/utils";
-import React, { useState } from "react"
 import { ScrollView, Text, View } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 import { PageTitleContainer, PageTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
