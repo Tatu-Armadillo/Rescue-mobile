@@ -5,7 +5,7 @@ import { sharer } from "data/services/utils";
 import React, { useState } from "react"
 import { ScrollView, Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
-import { PageTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
+import { PageTitleStyled, PageSubTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
 import { RootStackParamList } from "ui/router/Router";
 import Button from 'ui/components/inputs/Button/Button';
 
@@ -17,39 +17,33 @@ interface IndexProps {
 
 const Lista: React.FC = ({ }) => {
 
-    const [name, setName] = useState('');
-    const [id, setId] = useState(0);
-    const [imageFront, setImageFront] = useState('');
-    const [height, setHeight] = useState(0);
-    const [weight, setWeight] = useState(0);
-    const [tipo, setTipo] = useState('');
-
-    const [pokedex, setPokedex] = useState(['']);
+    const [apresentarLista, setApresentarLista] = useState(false);
+    const [pokedex, setPokedex] = useState([sharer.pokemon]);
 
     async function buscarPokemon() {
         try {
             let pokeData = [];
-            for (let index = 1; index <= 100; index++) {
+            for (let index = 1; index <= 151; index++) {
                 const { data } = await ApiPokemons.get('pokemon/' + index);
                 const pokemon: UsePokemon = data;
-                setName(pokemon.name);
-                setId(pokemon.id);
-                setHeight(pokemon.height)
-                setWeight(pokemon.weight)
-                setImageFront(pokemon.sprites.front_default)
-                let tipos = '';
-                pokemon.types.map((tipo, index) => {
-                    if (index != 0) {
-                        tipos += ' | ';
-                    }
-                    tipos += tipo.type.name;
-                });
-                pokeData.push(pokemon.name);
-                setTipo(tipos)
+                sharer.pokemon = {
+                    id: data.id,
+                    name: data.name,
+                    height: data.height,
+                    weight: data.weight,
+                    base_experience: data.base_experience,
+                    sprites:
+                    {
+                        back_default: data.sprites.back_default,
+                        front_default: data.sprites.front_default
+                    },
+                    types: data.types
+                }
+                pokeData.push(sharer.pokemon)
+                console.log();
+
             }
             setPokedex(pokeData)
-
-
         } catch (error) {
             console.log(error);
         }
@@ -58,14 +52,28 @@ const Lista: React.FC = ({ }) => {
     return (
         <ScrollView>
             <PageTitleStyled> Animais Registrados </PageTitleStyled>
-            <Button onPress={() => buscarPokemon()}>Listar Pokemons </Button>
-            <View style={{padding: 20, flexDirection: "row"}} >
-                <Avatar.Image source={{ uri: imageFront }} />
-                <Text>{pokedex[1]}</Text>
-            </View>
+            <Button style={{ marginTop: 20 }} mode="outlined"
+                onPress={() => {
+                    buscarPokemon()
+                    setApresentarLista(true);
+                }
+                }>Listar Pokemons </Button>
+
+            {apresentarLista && pokedex.length > 0 ?
+                pokedex.map((pokemon, index) =>
+                    <View key={index} style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", margin: 20 }}>
+                        <Avatar.Image source={{ uri: pokemon?.sprites.front_default }} />
+                        <Text style={{ marginStart: 10, marginEnd: 10 }}>{pokemon?.name}</Text>
+                        <Avatar.Image source={{ uri: pokemon?.sprites.back_default }} />
+                    </View>
+                )
+                :
+                <View>
+                    <PageSubTitleStyled>Pressione o botão para apresentar o catalogo de pokemons</PageSubTitleStyled>
+                </View>
+            }
         </ScrollView>
     );
 }
-
 
 export default Lista;
