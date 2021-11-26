@@ -17,11 +17,10 @@ interface IndexProps {
 const Lista: React.FC<IndexProps> = ({ navigation }) => {
 
     const [apresentarLista, setApresentarLista] = useState(false);
-    const [pokedex, setPokedex] = useState([sharer.pokemon]);
+    const [listPokemon, setListPokemon] = useState([sharer.pokemon]);
 
     async function buscarPokemon() {
         try {
-            let pokeData = [];
             for (let index = 1; index <= 9; index++) {
                 const { data } = await ApiPokemons.get('pokemon/' + index);
                 sharer.pokemon = {
@@ -37,10 +36,11 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                     },
                     types: data.types
                 }
-                pokeData.push(sharer.pokemon)
-                console.log();
+                sharer.pokedex.push(sharer.pokemon)
             }
-            setPokedex(pokeData)
+            setListPokemon(sharer.pokedex)
+            console.log(sharer.pokedex);
+            
         } catch (error) {
             console.log(error);
         }
@@ -57,8 +57,8 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                 }>Listar Pokemons
             </Button>
 
-            {apresentarLista && pokedex.length > 0 ?
-                pokedex.map((pokemon, index) =>
+            {apresentarLista && listPokemon.length > 0 ?
+                listPokemon.map((pokemon, index) =>
 
                     <View key={index} style={{flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <TouchableOpacity style={{ flexDirection: "row" }}
@@ -73,7 +73,7 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                                     <Text style={{ fontSize: 20, color: "#000" }}>{pokemon?.id}</Text>
                                     <AirbnbRating defaultRating={5} isDisabled size={10} showRating={false} />
                                 </View>
-                                <Avatar.Image source={{ uri: pokemon?.sprites.back_default }} />
+                                <Avatar.Image source={{ uri: pokemon?.sprites.front_default }} />
                             </View>
                         </TouchableOpacity>
                     </View>

@@ -1,11 +1,13 @@
 import { UsePokemon } from "data/@types/PokemonInterface";
 
 export const sharer: Sharer = {
-    pokemon: undefined
+    pokemon: undefined,
+    pokedex: []
 }
 
 interface Sharer {
     pokemon: UsePokemon | undefined
+    pokedex: UsePokemon[]
 }
 
 export const Donos = {
