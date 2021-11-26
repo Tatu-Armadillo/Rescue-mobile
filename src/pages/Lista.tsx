@@ -1,9 +1,8 @@
 import { StackNavigationProp } from "@react-navigation/stack";
-import { UsePokemon } from "data/@types/PokemonInterface";
 import { ApiPokemons } from "data/services/ApiPokemon";
 import { sharer } from "data/services/utils";
 import React, { useState } from "react"
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 import { PageTitleStyled, PageSubTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
 import { RootStackParamList } from "ui/router/Router";
@@ -61,20 +60,20 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                 pokedex.map((pokemon, index) =>
 
                     <View key={index} style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                        <Button style={{ flexDirection: "row" }}
+                        <TouchableOpacity style={{ flexDirection: "row" }}
                             onPress={() => {
                                 navigation.navigate('Contratar');
                             }}>
 
-                            <View style={{ flexDirection: "row" }}>
+                            <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 20 }}>
                                 <Avatar.Image source={{ uri: pokemon?.sprites.front_default }} />
-                                <View style={{ flexDirection: "column" }}>
-                                    <Text style={{ fontSize: 20, color: "#FFF" }}>{pokemon?.name}</Text>
-                                    <Text style={{ fontSize: 20, color: "#FFF" }}>{pokemon?.id}</Text>
+                                <View style={{ flexDirection: "column", alignItems: "center" }}>
+                                    <Text style={{ fontSize: 20, color: "#000" }}>{pokemon?.name}</Text>
+                                    <Text style={{ fontSize: 20, color: "#000" }}>{pokemon?.id}</Text>
                                 </View>
                                 <Avatar.Image source={{ uri: pokemon?.sprites.back_default }} />
                             </View>
-                        </Button>
+                        </TouchableOpacity>
                     </View>
                 )
                 :
