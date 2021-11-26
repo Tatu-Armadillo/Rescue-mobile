@@ -4,6 +4,7 @@ import { sharer } from "data/services/utils";
 import React, { useState } from "react"
 import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { Avatar, Button } from "react-native-paper";
+import { AirbnbRating } from "react-native-ratings";
 import { PageTitleStyled, PageSubTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
 import { RootStackParamList } from "ui/router/Router";
 
@@ -59,7 +60,7 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
             {apresentarLista && pokedex.length > 0 ?
                 pokedex.map((pokemon, index) =>
 
-                    <View key={index} style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View key={index} style={{flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <TouchableOpacity style={{ flexDirection: "row" }}
                             onPress={() => {
                                 navigation.navigate('Contratar');
@@ -70,6 +71,7 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                                 <View style={{ flexDirection: "column", alignItems: "center" }}>
                                     <Text style={{ fontSize: 20, color: "#000" }}>{pokemon?.name}</Text>
                                     <Text style={{ fontSize: 20, color: "#000" }}>{pokemon?.id}</Text>
+                                    <AirbnbRating defaultRating={5} isDisabled size={10} showRating={false} />
                                 </View>
                                 <Avatar.Image source={{ uri: pokemon?.sprites.back_default }} />
                             </View>
@@ -77,8 +79,9 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                     </View>
                 )
                 :
-                <View>
+                <View style={{flex: 1, padding: 10}}>
                     <PageSubTitleStyled>Pressione o botão para apresentar o catalogo de pokemons</PageSubTitleStyled>
+                    <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Index')}>Pesquisar por Nome</Button>
                 </View>
             }
         </ScrollView>

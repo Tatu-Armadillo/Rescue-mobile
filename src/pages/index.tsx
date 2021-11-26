@@ -69,7 +69,7 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView>
             <PageTitleContainer>
                 <PageTitleStyled>Digite o numero do pokemon</PageTitleStyled>
             </PageTitleContainer>
@@ -88,7 +88,6 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                             <PageSubTitleStyled>Avalição</PageSubTitleStyled>
                             <AirbnbRating defaultRating={5} isDisabled size={10} showRating={false} />
                         </View>
-                        {/* {imageBack ? <Image style={{ width: 100, height: 100 }} source={{ uri: `${imageBack}` }} /> : null} */}
                     </View>
                     <View style={{ flexDirection: "row", padding: 10, justifyContent: "space-evenly" }}>
                         <View style={{ margin: 5 }}>

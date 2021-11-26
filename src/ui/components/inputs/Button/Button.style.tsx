@@ -5,7 +5,6 @@ export const ButtonStyled = styled(Button)`
     margin: 0 auto;
     padding: ${({theme}) => theme.spacing(0.5)};
     width: 100%;
-    max-width: 300px;
     border-radius: ${({theme}) => theme.shape.borderRadius};
 `;
 
