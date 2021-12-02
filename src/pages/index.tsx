@@ -24,21 +24,20 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
     const [name, setName] = useState('');
     const [id, setId] = useState(0);
     const [imageFront, setImageFront] = useState('');
-    const [imageBack, setImageBack] = useState('');
     const [height, setHeight] = useState(0);
     const [weight, setWeight] = useState(0);
     const [tipo, setTipo] = useState('');
 
     async function buscarPokemon(nome: string) {
         try {
-            const { data } = await ApiPokemons.get('pokemon/' + nome);
+            let nameMenor: string = nome.toLowerCase();
+            const { data } = await ApiPokemons.get('pokemon/' + nameMenor);
             const pokemon: UsePokemon = data;
             setName(pokemon.name);
             setId(pokemon.id);
             setHeight(pokemon.height)
             setWeight(pokemon.weight)
             setImageFront(pokemon.sprites.front_default)
-            setImageBack(pokemon.sprites.back_default)
             let tipos = '';
             pokemon.types.map((tipo, index) => {
                 if (index != 0) {
@@ -105,6 +104,8 @@ const Index: React.FC<IndexProps> = ({ navigation }) => {
                 :
                 <View style={{ flex: 1, alignItems: "center", padding: 10 }}>
                     <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Lista')}>Verificar Catalogo</Button>
+                    <Image style={{ marginTop: 10, width: 300, height: 300 }} 
+                    source={{ uri: `https://www.cocacolabrasil.com.br/content/dam/journey/br/pt/private/stories/2016/06/coca-cola-brasil-propaganda-antiga-natal-papai-noel-isto-faz-um-bem.rendition.445.560.jpg` }} />
                 </View>
             }
         </ScrollView>

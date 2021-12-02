@@ -1,6 +1,6 @@
 import { Donos, sharer } from "data/services/utils";
 import React from "react";
-import { ScrollView, Text, View, Linking } from "react-native";
+import { ScrollView, Text, View, Linking, Image } from "react-native";
 import { Avatar } from "react-native-paper";
 import Button from "ui/components/inputs/Button/Button";
 import { PageSubTitleStyled, PageTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
@@ -38,10 +38,14 @@ const Contato: React.FC = () => {
                 </View>
                 <View style={{ alignItems: "center", padding: 10 }}>
                     <Text style={{ fontSize: 25 }}>{horarioManha}</Text>
-                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp(Donos.dono1.telefone, mensagem + horarioManha)}>Agendar</Button>
+                    <Button style={{ marginBottom: 5 }} mode={'contained'} onPress={() => whatsApp(Donos.dono1.telefone, mensagem + horarioManha)}>Agendar</Button>
 
                     <Text style={{ fontSize: 25 }}>{horarioTarde}</Text>
-                    <Button style={{ marginBottom: 25 }} mode={'contained'} onPress={() => whatsApp(Donos.dono2.telefone, mensagem + horarioTarde)}>Agendar</Button>
+                    <Button style={{ marginBottom: 5 }} mode={'contained'} onPress={() => whatsApp(Donos.dono2.telefone, mensagem + horarioTarde)}>Agendar</Button>
+                </View>
+                <View style={{justifyContent: "center", alignItems: "center"}}>
+                    <Image style={{ marginTop: 10, width: 200, height: 200 }}
+                        source={{ uri: `https://www.cocacolabrasil.com.br/content/dam/journey/br/pt/private/stories/2016/06/coca-cola-brasil-propaganda-antiga-natal-papai-noel-isto-faz-um-bem.rendition.445.560.jpg` }} />
                 </View>
             </View>
         </ScrollView>

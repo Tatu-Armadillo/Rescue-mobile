@@ -2,7 +2,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { ApiPokemons } from "data/services/ApiPokemon";
 import { sharer } from "data/services/utils";
 import React, { useState } from "react"
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Image } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 import { AirbnbRating } from "react-native-ratings";
 import { PageTitleStyled, PageSubTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
@@ -40,7 +40,7 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
             }
             setListPokemon(sharer.pokedex)
             console.log(sharer.pokedex);
-            
+
         } catch (error) {
             console.log(error);
         }
@@ -60,7 +60,7 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
             {apresentarLista && listPokemon.length > 0 ?
                 listPokemon.map((pokemon, index) =>
 
-                    <View key={index} style={{flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View key={index} style={{ flex: 1, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <TouchableOpacity style={{ flexDirection: "row" }}
                             onPress={() => {
                                 navigation.navigate('Contratar');
@@ -79,10 +79,16 @@ const Lista: React.FC<IndexProps> = ({ navigation }) => {
                     </View>
                 )
                 :
-                <View style={{flex: 1, padding: 10}}>
+                <View style={{ flex: 1, padding: 10 }}>
                     <PageSubTitleStyled>Pressione o botão para apresentar o catalogo de pokemons</PageSubTitleStyled>
                     <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Index')}>Pesquisar por Nome</Button>
+                    <View style={{ justifyContent: "center", alignItems: "center" }}>
+                        <Image style={{ marginTop: 10, width: 300, height: 300 }}
+                            source={{ uri: `https://www.cocacolabrasil.com.br/content/dam/journey/br/pt/private/stories/2016/06/coca-cola-brasil-propaganda-antiga-natal-papai-noel-isto-faz-um-bem.rendition.445.560.jpg` }} />
+                    </View>
                 </View>
+
+
             }
         </ScrollView>
     );

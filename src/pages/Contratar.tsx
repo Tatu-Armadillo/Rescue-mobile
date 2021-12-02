@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { StackNavigationProp } from "@react-navigation/stack";
 import { sharer } from "data/services/utils";
-import { ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 import { PageTitleContainer, PageTitleStyled } from "ui/components/data-display/PageTitle/PageTitle.style";
 import { RootStackParamList } from "ui/router/Router";
@@ -39,6 +39,10 @@ const Contratar: React.FC<IndexProps> = ({ navigation }) => {
             <View style={{ padding: 5 }}>
                 <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Contato')} >Entrar em Contato</Button>
                 <Button style={{ marginTop: 10 }} mode={'contained'} onPress={() => navigation.navigate('Index')} >Voltar</Button>
+                <View style={{justifyContent: "center", alignItems: "center"}}>
+                    <Image style={{ marginTop: 10, width: 200, height: 200 }}
+                        source={{ uri: `https://www.cocacolabrasil.com.br/content/dam/journey/br/pt/private/stories/2016/06/coca-cola-brasil-propaganda-antiga-natal-papai-noel-isto-faz-um-bem.rendition.445.560.jpg` }} />
+                </View>
             </View>
         </ScrollView>
     );
